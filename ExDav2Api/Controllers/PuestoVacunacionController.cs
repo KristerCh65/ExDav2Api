@@ -29,9 +29,10 @@ namespace ExDav2Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<PuestoVacunacionDTO>> FindIdPuesto(int puesto)
+        public async Task<ActionResult<PuestoVacunacionDTO>> FindIdPuesto(int id)
         {
-            return await puestoVacunacionApp.FindIdPuesto(puesto);
+            PuestoVacunacionDTO vacunacionDTO = await puestoVacunacionApp.FindIdPuesto(id);
+            return vacunacionDTO;
         }
 
         [HttpPost]
@@ -41,7 +42,7 @@ namespace ExDav2Api.Controllers
             return StatusCode(201);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{idPuesto}")]
         public async Task<IActionResult> ActualizarPuesto(PuestoVacunacion puestoVacunacion, int idPuesto)
         {
             if(idPuesto != puestoVacunacion.IdPuesto)
@@ -52,7 +53,7 @@ namespace ExDav2Api.Controllers
             return StatusCode(201);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{puestoVacunacionId}")]
         public async Task<IActionResult> RemoverPuesto(int puestoVacunacionId)
         {
             await puestoVacunacionApp.RemovePuesto(puestoVacunacionId);

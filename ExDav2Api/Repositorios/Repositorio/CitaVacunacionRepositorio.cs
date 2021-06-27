@@ -19,9 +19,11 @@ namespace ExDav2Api.Repositorios.Repositorio
             coviContext = context;
         }
 
-        public async Task AddCitas(CitaVacunacion cita)
+        public async Task<CitaVacunacion> AddCitas(CitaVacunacion cita)
         {
             await coviContext.AddAsync(cita);
+            await coviContext.SaveChangesAsync();
+            return cita;
         }
 
         public async Task<CitaVacunacion> RemoveCitas(int cita)
@@ -39,7 +41,7 @@ namespace ExDav2Api.Repositorios.Repositorio
 
         public async Task<CitaVacunacionDTO> FindIdCitas(int idCita)
         {
-            var findCita = await coviContext.CitasVacunacion.FirstOrDefaultAsync(p => p.IdCita == idCita);
+            var findCita = await coviContext.CitasVacunacion.Include(p => p.Person).Include(v => v.Puesto).FirstOrDefaultAsync(p => p.IdCita == idCita);
 
             if (findCita == null)
             {
@@ -63,7 +65,7 @@ namespace ExDav2Api.Repositorios.Repositorio
 
         public async Task<IEnumerable<CitaVacunacion>> GetCitas()
         {
-            return await coviContext.CitasVacunacion.ToListAsync();
+            return await coviContext.CitasVacunacion.Include(p => p.Person).Include(v => v.Puesto).ToListAsync();
         }
 
         public async Task ActualizarCita(CitaVacunacion cita)

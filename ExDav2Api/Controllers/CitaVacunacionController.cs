@@ -29,9 +29,9 @@ namespace ExDav2Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<CitaVacunacionDTO>> FindIdCita(int idCita)
+        public async Task<ActionResult<CitaVacunacionDTO>> FindIdCita(int id)
         {
-            return await citasAppService.FindIdCitas(idCita);
+            return await citasAppService.FindIdCitas(id);
         }
 
         [HttpPost]
@@ -41,14 +41,14 @@ namespace ExDav2Api.Controllers
             return StatusCode(201);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{citaVacunacion}")]
         public async Task<IActionResult> ActualizarCita(CitaVacunacion citaVacunacion)
         {
             await citasAppService.ActualizarCita(citaVacunacion);
             return Ok(citaVacunacion);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{idCita}")]
         public async Task<IActionResult> RemoverCita(int idCita)
         {
             await citasAppService.RemoveCitas(idCita);

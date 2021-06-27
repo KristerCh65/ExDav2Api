@@ -10,7 +10,7 @@ namespace ExDav2Api.Repositorios.Interface
     public interface ICitaVacunacionRepositorio
     {
         Task<IEnumerable<CitaVacunacion>> GetCitas();
-        Task AddCitas(CitaVacunacion cita);
+        Task<CitaVacunacion> AddCitas(CitaVacunacion cita);
         Task<CitaVacunacion> RemoveCitas(int idCita);
         Task<CitaVacunacionDTO> FindIdCitas(int idCita);
         Task ActualizarCita(CitaVacunacion cita);

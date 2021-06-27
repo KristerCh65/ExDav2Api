@@ -19,9 +19,11 @@ namespace ExDav2Api.Repositorios.Repositorio
             coviContext = context;
         }
 
-        public async Task AddPersona(Persona persona)
+        public async Task<Persona> AddPersona(Persona persona)
         {
             await coviContext.AddAsync(persona);
+            await coviContext.SaveChangesAsync();
+            return persona;
         }
 
         public async Task<Persona> RemovePersona(int persona)

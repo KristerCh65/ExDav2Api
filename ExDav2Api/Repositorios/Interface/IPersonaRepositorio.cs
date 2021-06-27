@@ -10,7 +10,7 @@ namespace ExDav2Api.Repositorios.Interface
     public interface IPersonaRepositorio
     {
         Task<IEnumerable<Persona>> GetPersonas();
-        Task AddPersona(Persona persona);
+        Task<Persona> AddPersona(Persona persona);
         Task<Persona> RemovePersona(int idPersona);
         Task<PersonaDTO> FindIdPersona(long DniPersona);
         Task ActualizarPersona(Persona persona);
